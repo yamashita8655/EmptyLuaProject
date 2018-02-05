@@ -56,15 +56,12 @@ end
 --	LuaPlayAnimator("FadeObject", "FadeIn", false, false, "InitLoadingScene", "")
 --end
 function LuaMain()
-	LuaUnityDebugLog("LuaMainCalled!!")
-    --local result = {}
-	--local a = 0
-	--for i = 1, 1000000 do
-	--	a = 1
-	--end
-	LuaUnityDebugLog("LuaMainCalled!!")
-	
-	LoadAllLuaScriptFromLocal()
+	if Platform == "Editor" then
+		LoadAllLuaScriptFromLocal()-- エディターで、ローカルファイル読むときは、こっち使う必要がある。こっちは、直接StreamingAssetsのパスでDoFileを行う。
+		--LoadAllLuaScript();-- エディター上でアセットバンドル使いたい場合は、こっちを有効にする必要がある
+	else
+		LoadAllLuaScript();-- こっちは、一度PersistentDataPathにファイルを保存してから、PersistentDataPathのパスでDoFileを行う。
+	end
 end
 
 --ゲームの情報
@@ -106,6 +103,7 @@ function LoadAllLuaScriptFromLocal()
 end
 
 function InitGame()
+	LuaUnityDebugLog("InitGameCalled!!")
 	LuaLoadPrefabAfter("common", "FadeObject", "FadeObject", "SystemCanvas")
 	--LuaSetActive("FadeObject", false)
 	--LuaPlayAnimator("FadeObject", "FadeIn", false, false, "InitLoadingScene", "")
@@ -137,7 +135,7 @@ function LoadAllLuaScriptCallback()
 	local index = LuaFileLoadedCount+1
 	dofile(PersistentDataPath.."/"..LuaFileList[index])
 	LuaFileLoadedCount = LuaFileLoadedCount + 1
-	UpdateLoadingData()
+	--UpdateLoadingData()
 	LoadAllLuaScript()
 end
 

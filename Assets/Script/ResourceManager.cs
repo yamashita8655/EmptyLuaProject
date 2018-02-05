@@ -60,6 +60,7 @@ public class ResourceManager : SingletonMonoBehaviour<ResourceManager> {
 #else
 		//string path = Application.streamingAssetsPath + "/" + "Utility.lua";
 		string path = loaderData.LoadPath;
+		Debug.Log("-----Resources load-----");
 		WWW www = new WWW(path);
 		while(!www.isDone){
 			yield return null;
