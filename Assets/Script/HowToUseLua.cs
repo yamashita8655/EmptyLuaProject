@@ -16,11 +16,11 @@ public class HowToUseLua : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-//		test1 ();
+		test1 ();
 //		StartCoroutine(test1_1());
 //		test1_2();
-		test1_3();
-		test1_4();
+//		test1_3();
+//		test1_4();
 //		test2 ();
 //		test3 ();
 //		test4 ();
@@ -59,9 +59,15 @@ public class HowToUseLua : MonoBehaviour {
 		IntPtr res_s = NativeMethods.lua_tolstring(luastate, 3, out output);
 		string resString = Marshal.PtrToStringAnsi(res_s);
 		int res_bool = NativeMethods.lua_toboolean(luastate, 4);//true=1 false=0
-	}
 
-	public IEnumerator test1_1()
+        Debug.Log(res_width);
+        Debug.Log(res_height);
+        Debug.Log(resString);
+        Debug.Log(res_bool);
+
+    }
+
+    public IEnumerator test1_1()
 	{
 		WWW www = new WWW("http://natural-nail-eye.sakura.ne.jp/BaseMoveController.lua");
 		while (www.isDone == false) {

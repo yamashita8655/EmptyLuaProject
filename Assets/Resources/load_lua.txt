@@ -1,0 +1,4 @@
+windowWidth = 720;
+windowHeight = 480;
+windowName = "windowName";
+testboolean = false;
